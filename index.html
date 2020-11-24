@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <input id="url_input" type="text">
+        <a class="store-BTN" href="" id="url" class="disabled">تسجيل الدخول</a>
+        <span class="alert">رجاء كتابه رابط الموقع كاملاً مثال:(<span id="result"></span>)</span>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(document).on('click','#url.disabled',function(e){
+            e.preventDefault()
+        })
+        $(document).ready(function(){
+            var url = window.localStorage.getItem('name');
+            $('#url_input').val(url)
+            $('#url').attr('href',url+'/admin')
+            if(url != ''){
+                $('#url').removeClass('disabled')
+            }
+        })
+        $(document).on('keyup', '#url_input', function(){
+            var value = $(this).val();
+            var protocol = 'http://';
+            var protocols = 'https://';
+            var url = '.semseem.com';
+            if(value == ''){
+                $('.alert').removeClass("show");
+                $('#url').addClass('disabled');
+                $('#url').attr('href','');
+            }else if(value.indexOf(protocol) != -1 || value.indexOf(protocols) != -1){
+                if(value.indexOf(url) != -1){
+                    $('#url').attr('target','_blank')
+                    window.localStorage.setItem('name', value);
+                    $('#url').removeClass('disabled')
+                    $('.alert').removeClass("show");
+                    $('#url').attr('href',value);
+                }else{
+                    window.localStorage.setItem('name', protocols+value+url+'/admin');
+                    $('#url').attr('href',protocols+value+url+'/admin')
+                }
+            }else{
+                window.localStorage.setItem('name', protocols+value+url+'/admin');
+                $('#url').attr('href',protocols+value+url+'/admin')
+            }
+        })
+
+        $(document).on('change', '#url_input', function(){
+            var value = $(this).val();
+            var protocol = 'http://';
+            var protocols = 'https://';
+            var url = '.semseem.com';
+            if(value == ''){
+                $('.alert').removeClass("show");
+                $('#url').addClass('disabled');
+                $('#url').attr('href','');
+            }else if(value.indexOf(protocol) != -1 || value.indexOf(protocols) != -1){
+                if(value.indexOf(url) != -1){
+                    $('#url').attr('target','_blank')
+                    window.localStorage.setItem('name', value);
+                    $('#url').removeClass('disabled')
+                    $('.alert').removeClass("show");
+                    $('#url').attr('href',value);
+                }else{
+                    window.localStorage.setItem('name', protocols+value+url+'/admin');
+                    $('#url').attr('href',protocols+value+url+'/admin')
+                }
+            }else{
+                window.localStorage.setItem('name', protocols+value+url+'/admin');
+                $('#url').attr('href',protocols+value+url+'/admin')
+            }
+        })
+
+        $(document).bind('paste','#url_input',function(e){
+            setTimeout(function() {
+                //Do whatever you want to $(ctl) here....
+                var protocol = 'http://';
+                var protocols = 'https://';
+                var url = '.semseem.com';
+                if(e.target.value == ''){
+                    $('.alert').removeClass("show");
+                    $('#url').addClass('disabled')
+                }else if($('#url').attr('href').indexOf(protocol) != -1 || $('#url').attr('href').indexOf(protocols) != -1){
+                    if($('#url').attr('href').indexOf(url) != -1){
+                        $('#url').attr('target','_blank')
+                        $('#url').attr('href',e.target.value)
+                        window.localStorage.setItem('name', e.target.value);
+                        $('#url').removeClass('disabled')
+                        $('.alert').removeClass("show");
+                    }else{
+                        $('#url').attr('href',protocols+e.target.value+url+'/admin')
+                        $('#url').removeClass('disabled')
+                        $('.alert').removeClass("show");
+                    }
+                }else{
+                    $('#url').attr('href',protocols+e.target.value+url+'/admin')
+                    $('#url').removeClass('disabled')
+                    $('.alert').removeClass("show");
+                }
+            }, 100);
+        })
+        $(document).bind('cut','#url_input',function(e){
+            setTimeout(function() {
+                //Do whatever you want to $(ctl) here....
+                $('#url').attr('href','')
+                $('#url').addClass('disabled')
+                
+            }, 100);
+        })
+    </script>
+</body>
+</html>
