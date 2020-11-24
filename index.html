@@ -18,7 +18,7 @@
         $(document).ready(function(){
             var url = window.localStorage.getItem('name');
             $('#url_input').val(url)
-            $('#url').attr('href',url+'/admin')
+            $('#url').attr('href',url)
             if(url != ''){
                 $('#url').removeClass('disabled')
             }
